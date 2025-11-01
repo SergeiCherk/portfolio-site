@@ -8,7 +8,7 @@ class Project(models.Model):
     github_link = models.URLField(verbose_name="Ссылка на GitHub", blank=True)
     live_link = models.URLField(verbose_name="Ссылка на демо", blank=True)
     image = models.ImageField(upload_to='projects/', verbose_name="Изображение", 
-                             blank=True, null=True)
+                             blank=True, null=True)  # <- null=True уже есть
     created_at = models.DateTimeField(auto_now_add=True)
     is_featured = models.BooleanField(default=False, verbose_name="Избранный проект")
     

@@ -3,9 +3,10 @@ from django.db import models
 class AboutMe(models.Model):
     name = models.CharField(max_length=100, verbose_name="Имя")
     bio = models.TextField(verbose_name="О себе")
-    photo = models.ImageField(upload_to='about/', verbose_name="Фото")
+    photo = models.ImageField(upload_to='about/', verbose_name="Фото", 
+                             blank=True, null=True)  # <- null=True
     resume = models.FileField(upload_to='resume/', verbose_name="Резюме PDF", 
-                             blank=True)
+                             blank=True, null=True)  # <- null=True
     
     # Социальные сети
     github = models.URLField(blank=True)
