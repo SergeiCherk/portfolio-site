@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты - Моё Портфолио{% endblock %}
+
+{% block content %}
+<div class="py-16 bg-gray-50 dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Свяжитесь со мной
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300">
+                Есть вопрос или предложение? Напишите мне!
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Форма обратной связи -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                    Отправить сообщение
+                </h2>
+                
+                <!-- Сообщения -->
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="mb-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200{% endif %}">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            {{ message }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    <!-- Имя -->
+                    <div>
+                        <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Ваше имя *
+                        </label>
+                        <input type="text" 
+                               id="name" 
+                               name="name" 
+                               required
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition">
+                    </div>
+                    
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Email *
+                        </label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               required
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition">
+                    </div>
+                    
+                    <!-- Тема -->
+                    <div>
+                        <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Тема *
+                        </label>
+                        <input type="text" 
+                               id="subject" 
+                               name="subject" 
+                               required
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition">
+                    </div>
+                    
+                    <!-- Сообщение -->
+                    <div>
+                        <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Сообщение *
+                        </label>
+                        <textarea id="message" 
+                                  name="message" 
+                                  rows="6" 
+                                  required
+                                  class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition resize-none"></textarea>
+                    </div>
+                    
+                    <!-- Кнопка отправки -->
+                    <button type="submit" 
+                            class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition transform hover:scale-105 flex items-center justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Отправить сообщение
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Контактная информация -->
+            <div>
+                <!-- Карточка с контактами -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                        Контактная информация
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Email -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                    Email
+                                </h3>
+                                <a href="mailto:your-email@example.com" 
+                                   class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
+                                    your-email@example.com
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Телефон -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-phone text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                    Телефон
+                                </h3>
+                                <a href="tel:+1234567890" 
+                                   class="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                                    +1 (234) 567-890
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Местоположение -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                    Местоположение
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-400">
+                                    Москва, Россия
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Социальные сети -->
+                <div class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg shadow-lg p-8 text-white">
+                    <h2 class="text-2xl font-bold mb-6">
+                        Социальные сети
+                    </h2>
+                    <p class="mb-6 text-gray-100">
+                        Подписывайтесь на мои соцсети, чтобы быть в курсе последних новостей и проектов
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="#" target="_blank"
+                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
+                            <i class="fab fa-github text-2xl mr-3"></i>
+                            <span class="font-semibold">GitHub</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
+                            <i class="fab fa-linkedin text-2xl mr-3"></i>
+                            <span class="font-semibold">LinkedIn</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
+                            <i class="fab fa-telegram text-2xl mr-3"></i>
+                            <span class="font-semibold">Telegram</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
+                            <i class="fab fa-twitter text-2xl mr-3"></i>
+                            <span class="font-semibold">Twitter</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

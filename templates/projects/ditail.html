@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} - Моё Портфолио{% endblock %}
+
+{% block content %}
+<div class="py-16 bg-white dark:bg-gray-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Назад к проектам -->
+        <a href="{% url 'projects:list' %}" 
+           class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 mb-8">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Назад к проектам
+        </a>
+        
+        <!-- Заголовок -->
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            {{ project.title }}
+        </h1>
+        
+        <!-- Технологии -->
+        <div class="flex flex-wrap gap-2 mb-8">
+            {% for tech in project.tech_stack.split:',' %}
+            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-4 py-2 rounded-lg font-semibold">
+                {{ tech|trim }}
+            </span>
+            {% endfor %}
+        </div>
+        
+        <!-- Изображение проекта -->
+        {% if project.image %}
+        <div class="mb-8 rounded-lg overflow-hidden shadow-2xl">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" 
+                 class="w-full h-auto">
+        </div>
+        {% else %}
+        <div class="mb-8 rounded-lg overflow-hidden shadow-2xl h-96 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <i class="fas fa-project-diagram text-white text-9xl"></i>
+        </div>
+        {% endif %}
+        
+        <!-- Кнопки действий -->
+        <div class="flex flex-wrap gap-4 mb-8">
+            {% if project.github_link %}
+            <a href="{{ project.github_link }}" target="_blank" 
+               class="flex items-center bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition">
+                <i class="fab fa-github mr-2 text-xl"></i>
+                Посмотреть на GitHub
+            </a>
+            {% endif %}
+            
+            {% if project.live_link %}
+            <a href="{{ project.live_link }}" target="_blank" 
+               class="flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                <i class="fas fa-external-link-alt mr-2"></i>
+                Открыть демо
+            </a>
+            {% endif %}
+        </div>
+        
+        <!-- Описание проекта -->
+        <div class="prose dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                О проекте
+            </h2>
+            <div class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+                {{ project.description }}
+            </div>
+        </div>
+        
+        <!-- Особенности проекта -->
+        <div class="mt-12 bg-gray-50 dark:bg-gray-700 rounded-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Ключевые особенности
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            Современный стек
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Использование актуальных технологий и best practices
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            Адаптивный дизайн
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Отлично работает на всех устройствах
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            Высокая производительность
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Оптимизирован для быстрой работы
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            Безопасность
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Следование стандартам безопасности
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Другие проекты -->
+        <div class="mt-12 border-t dark:border-gray-700 pt-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Другие проекты
+            </h2>
+            <a href="{% url 'projects:list' %}" 
+               class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 text-lg font-semibold">
+                Посмотреть все проекты
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
