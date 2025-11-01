@@ -16,8 +16,16 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-temp-key-for-developm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='https://portfolio-do5j.onrender.com').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+if 'RENDER' in os.environ:
+    render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if render_hostname:
+        ALLOWED_HOSTS.append(render_hostname)
 
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = [
+        'https://portfolio-do5j.onrender.com',  # замени на свой домен
+    ]
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
