@@ -16,3 +16,11 @@ def trim(value):
     if value:
         return value.strip()
     return value
+
+@register.filter(name='floordiv')
+def floordiv(value, arg):
+    """Целочисленное деление"""
+    try:
+        return int(value) // int(arg)
+    except (ValueError, ZeroDivisionError, TypeError):
+        return 0
