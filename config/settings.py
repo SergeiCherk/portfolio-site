@@ -175,20 +175,32 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-# Cloudinary настройки
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
-    'API_KEY': config('CLOUDINARY_API_KEY', default=''),
-    'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
-}
 
-# Используй Cloudinary для медиафайлов если настроено
+# Cloudinary настройки
 if CLOUDINARY_STORAGE['CLOUD_NAME']:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    
+    # Cloudinary для медиафайлов
     cloudinary.config(
         cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
         api_key=CLOUDINARY_STORAGE['API_KEY'],
         api_secret=CLOUDINARY_STORAGE['API_SECRET'],
         secure=True
     )
+    
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+else:
+    # Локальное хранилище (для разработки)
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
