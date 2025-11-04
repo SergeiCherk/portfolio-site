@@ -12,4 +12,7 @@ def project_list(request):
 
 def project_detail(request, pk):
     project = get_object_or_404(Project, pk=pk)
-    return render(request, 'projects/detail.html', {'project': project})
+    context = {
+        'project': project,
+    }
+    return render(request, 'projects/detail.html', context)

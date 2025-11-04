@@ -3,8 +3,14 @@ from .models import Post
 
 def post_list(request):
     posts = Post.objects.filter(published=True)
-    return render(request, 'blog/list.html', {'posts': posts})
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'blog/list.html', context)
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug, published=True)
-    return render(request, 'blog/detail.html', {'post': post})
+    context = {
+        'post': post,
+    }
+    return render(request, 'blog/detail.html', context)
