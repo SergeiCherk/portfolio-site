@@ -9,10 +9,11 @@ class AboutMe(models.Model):
                              blank=True, null=True)  # <- null=True
     
     # Социальные сети
-    github = models.URLField(blank=True)
-    linkedin = models.URLField(blank=True)
-    telegram = models.URLField(blank=True)
-    email = models.EmailField(blank=True)
+    github = models.URLField(blank=True, verbose_name="GitHub")
+    vk = models.URLField(blank=True, verbose_name="Вконтакте")
+    habr = models.URLField(blank=True, verbose_name="Habr")
+    telegram = models.URLField(blank=True, verbose_name="Telegram")
+    email = models.EmailField(blank=True, verbose_name="Email")
     
     class Meta:
         verbose_name = "Обо мне"

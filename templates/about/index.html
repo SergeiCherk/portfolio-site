@@ -29,36 +29,48 @@
                     </p>
                 </div>
                 
-                <!-- Социальные сети -->
-                <div class="flex space-x-4 mb-6">
-                    {% if about.github %}
-                    <a href="{{ about.github }}" target="_blank" 
-                       class="bg-gray-800 dark:bg-gray-700 text-white p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    {% endif %}
-                    
-                    {% if about.linkedin %}
-                    <a href="{{ about.linkedin }}" target="_blank" 
-                       class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    {% endif %}
-                    
-                    {% if about.telegram %}
-                    <a href="{{ about.telegram }}" target="_blank" 
-                       class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
-                        <i class="fab fa-telegram text-xl"></i>
-                    </a>
-                    {% endif %}
-                    
-                    {% if about.email %}
-                    <a href="mailto:{{ about.email }}" 
-                       class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </a>
-                    {% endif %}
-                </div>
+<!-- Социальные сети -->
+<div class="flex space-x-4 mb-6">
+    {% if about.github %}
+    <a href="{{ about.github }}" target="_blank" 
+       class="bg-gray-800 dark:bg-gray-700 text-white p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition"
+       title="GitHub">
+        <i class="fab fa-github text-xl"></i>
+    </a>
+    {% endif %}
+    
+    {% if about.vk %}
+    <a href="{{ about.vk }}" target="_blank" 
+       class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
+       title="ВКонтакте">
+        <i class="fab fa-vk text-xl"></i>
+    </a>
+    {% endif %}
+    
+    {% if about.habr %}
+    <a href="{{ about.habr }}" target="_blank" 
+       class="bg-teal-600 text-white p-3 rounded-lg hover:bg-teal-700 transition"
+       title="Habr">
+        <i class="fas fa-h-square text-xl"></i>
+    </a>
+    {% endif %}
+    
+    {% if about.telegram %}
+    <a href="{{ about.telegram }}" target="_blank" 
+       class="bg-blue-400 text-white p-3 rounded-lg hover:bg-blue-500 transition"
+       title="Telegram">
+        <i class="fab fa-telegram text-xl"></i>
+    </a>
+    {% endif %}
+    
+    {% if about.email %}
+    <a href="mailto:{{ about.email }}" 
+       class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition"
+       title="Email">
+        <i class="fas fa-envelope text-xl"></i>
+    </a>
+    {% endif %}
+</div>
                 
                 <!-- Кнопка скачать резюме -->
                 {% if about.resume %}
