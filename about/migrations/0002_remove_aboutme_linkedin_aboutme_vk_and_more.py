@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             name='github',
             field=models.URLField(blank=True, verbose_name='GitHub'),
         ),
-        migrations.AlterField(
+        migrations.AddField(
             model_name='aboutme',
             name='habr',
             field=models.URLField(blank=True, verbose_name='Habr'),
