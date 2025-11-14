@@ -24,8 +24,8 @@ def floordiv(value, arg):
         return int(value) // int(arg)
     except (ValueError, ZeroDivisionError, TypeError):
         return 0
-    
-@register.filter
+
+@register.filter(name='multiply')
 def multiply(value, arg):
     try:
         return float(value) * float(arg)
