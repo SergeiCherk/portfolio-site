@@ -25,7 +25,7 @@
                 
                 <!-- Tech Stack Tags -->
                 <div class="flex flex-wrap justify-center gap-3 mb-8">
-                    {% for tech in project.tech_stack.split:"," %}
+                    {% for tech in project.tech_list %}
                     <span class="px-4 py-2 rounded-xl bg-gradient-to-r from-primary-100 to-accent-purple/20 dark:from-primary-900/50 dark:to-accent-purple/20 text-primary-700 dark:text-primary-300 font-medium text-sm border border-primary-200 dark:border-primary-800">
                         {{ tech|trim }}
                     </span>

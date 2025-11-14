@@ -80,7 +80,7 @@
                     
                     <!-- Tech Stack -->
                     <div class="flex flex-wrap gap-2">
-                        {% for tech in project.tech_stack.split:"," %}
+                        {% for tech in project.tech_list %}
                         <span class="badge badge-primary">
                             {{ tech|trim }}
                         </span>
@@ -165,7 +165,7 @@
                     
                     <!-- Tech Tags -->
                     <div class="flex flex-wrap gap-2">
-                        {% for tech in project.tech_stack.split:","  %}
+                        {% for tech in project.tech_list %}
                             {% if forloop.counter <= 3 %}
                             <span class="text-xs px-2 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                                 {{ tech|trim }}
