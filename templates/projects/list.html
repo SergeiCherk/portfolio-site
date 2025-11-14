@@ -129,7 +129,7 @@
         {% if projects %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for project in projects %}
-            <article class="group card hover-lift overflow-hidden animate-on-scroll" style="animation-delay: {{ forloop.counter0|multiply:0.05 }}s;">
+            <article class="group card hover-lift overflow-hidden animate-on-scroll" style="animation-delay: {{ forloop.counter0 * 0.05 }}s;">
                 <!-- Project Thumbnail -->
                 <div class="relative h-48 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
                     {% if project.image %}
