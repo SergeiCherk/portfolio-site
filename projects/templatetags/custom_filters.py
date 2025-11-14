@@ -29,5 +29,5 @@ def floordiv(value, arg):
 def multiply(value, arg):
     try:
         return float(value) * float(arg)
-    except:
-        return ''
+    except (ValueError, TypeError):
+        return 0
