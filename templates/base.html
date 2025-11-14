@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Моё Портфолио{% endblock %}</title>
-    
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -127,36 +132,23 @@
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
         
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         // Проверяем сохранённую тему
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        if (localStorage.getItem('theme') === 'dark') {
             html.classList.add('dark');
         }
         
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                html.classList.toggle('dark');
-                const isDark = html.classList.contains('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            
-                // Плавная анимация иконки
-                themeToggle.style.transform = 'rotate(360deg)';
-                setTimeout(() => {
-                    themeToggle.style.transform = 'rotate(0deg)';
-                }, 300);
-            });
-        }
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
         
         // Мобильное меню
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-       
-        if (mobileMenuButton && mobileMenu){
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
     
     {% block extra_js %}{% endblock %}
