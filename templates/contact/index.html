@@ -1,198 +1,269 @@
 {% extends 'base.html' %}
 
-{% block title %}Контакты - Моё Портфолио{% endblock %}
+{% block title %}Контакты - Портфолио{% endblock %}
 
 {% block content %}
-<div class="py-16 bg-gray-50 dark:bg-gray-900">
+
+<!-- Hero Section -->
+<section class="section-padding pt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <div class="text-center mb-16 animate-slide-up">
+            <span class="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-accent-teal/20 to-primary-100 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4">
                 Свяжитесь со мной
+            </span>
+            <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-900 dark:text-white mb-6">
+                Давайте создадим <br class="hidden md:block"/>
+                <span class="text-gradient">что-то великое</span>
             </h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300">
-                Есть вопрос или предложение? Напишите мне!
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Есть идея проекта или просто хотите поговорить? Я всегда открыт для новых возможностей!
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form & Info -->
+<section class="pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            
+            <!-- Contact Form -->
+            <div class="lg:col-span-3">
+                <div class="card p-8 md:p-10 animate-on-scroll">
+                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-purple flex items-center justify-center mr-4 shadow-lg">
+                            <i class="fas fa-paper-plane text-white"></i>
+                        </div>
+                        Отправить сообщение
+                    </h2>
+                    
+                    <!-- Success Message -->
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 text-white flex items-center shadow-lg animate-scale-in">
+                            <i class="fas fa-check-circle text-2xl mr-3"></i>
+                            <div>
+                                <div class="font-semibold">Успешно отправлено!</div>
+                                <div class="text-sm text-green-100">{{ message }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <form method="post" class="space-y-6">
+                        {% csrf_token %}
+                        
+                        <!-- Name -->
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Ваше имя *
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" 
+                                       id="name" 
+                                       name="name" 
+                                       required
+                                       placeholder="Иван Иванов"
+                                       class="input pl-12">
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Email *
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email" 
+                                       required
+                                       placeholder="ivan@example.com"
+                                       class="input pl-12">
+                            </div>
+                        </div>
+                        
+                        <!-- Subject -->
+                        <div>
+                            <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Тема *
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fas fa-tag text-gray-400"></i>
+                                </div>
+                                <input type="text" 
+                                       id="subject" 
+                                       name="subject" 
+                                       required
+                                       placeholder="Предложение о сотрудничестве"
+                                       class="input pl-12">
+                            </div>
+                        </div>
+                        
+                        <!-- Message -->
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Сообщение *
+                            </label>
+                            <textarea id="message" 
+                                      name="message" 
+                                      rows="6" 
+                                      required
+                                      placeholder="Расскажите о вашей идее или проекте..."
+                                      class="input resize-none"></textarea>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" 
+                                class="w-full px-8 py-4 rounded-2xl font-semibold bg-gradient-to-r from-primary-500 to-accent-purple text-white shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
+                            <i class="fas fa-paper-plane mr-2 group-hover:translate-x-1 transition-transform"></i>
+                            <span>Отправить сообщение</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Info Sidebar -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Contact Cards -->
+                <div class="card p-6 hover-lift animate-on-scroll">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4 shadow-lg">
+                        <i class="fas fa-envelope text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-2">
+                        Email
+                    </h3>
+                    <a href="mailto:your-email@example.com" 
+                       class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                        your-email@example.com
+                    </a>
+                </div>
+                
+                <div class="card p-6 hover-lift animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-lg">
+                        <i class="fas fa-phone text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-2">
+                        Телефон
+                    </h3>
+                    <a href="tel:+1234567890" 
+                       class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                        +7 (123) 456-78-90
+                    </a>
+                </div>
+                
+                <div class="card p-6 hover-lift animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mb-4 shadow-lg">
+                        <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-2">
+                        Местоположение
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Москва, Россия
+                    </p>
+                </div>
+                
+                <!-- Social Links Card -->
+                <div class="card p-6 bg-gradient-to-br from-primary-600 via-accent-purple to-accent-pink animate-on-scroll" style="animation-delay: 0.3s;">
+                    <h3 class="text-xl font-display font-bold text-white mb-4">
+                        Социальные сети
+                    </h3>
+                    <p class="text-white/90 text-sm mb-6">
+                        Подписывайтесь и следите за обновлениями
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="#" target="_blank"
+                           class="flex items-center justify-center space-x-2 p-3 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all transform hover:scale-105 text-white">
+                            <i class="fab fa-github text-xl"></i>
+                            <span class="font-medium text-sm">GitHub</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="flex items-center justify-center space-x-2 p-3 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all transform hover:scale-105 text-white">
+                            <i class="fab fa-vk text-xl"></i>
+                            <span class="font-medium text-sm">VK</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="flex items-center justify-center space-x-2 p-3 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all transform hover:scale-105 text-white">
+                            <i class="fab fa-telegram text-xl"></i>
+                            <span class="font-medium text-sm">Telegram</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="flex items-center justify-center space-x-2 p-3 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all transform hover:scale-105 text-white">
+                            <i class="fas fa-h-square text-xl"></i>
+                            <span class="font-medium text-sm">Habr</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Availability Badge -->
+                <div class="card p-6 text-center animate-on-scroll" style="animation-delay: 0.4s;">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 mb-3">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                        <span class="font-semibold">Доступен для проектов</span>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Обычно отвечаю в течение 24 часов
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section (Optional) -->
+<section class="section-padding bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white mb-4">
+                Часто задаваемые вопросы
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400">
+                Ответы на популярные вопросы о сотрудничестве
             </p>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="space-y-4">
+            <!-- FAQ Item -->
+            <details class="card p-6 cursor-pointer group animate-on-scroll">
+                <summary class="flex justify-between items-center font-display font-semibold text-gray-900 dark:text-white text-lg">
+                    <span>Какие проекты вы принимаете?</span>
+                    <i class="fas fa-chevron-down group-open:rotate-180 transition-transform text-primary-600"></i>
+                </summary>
+                <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Я работаю с веб-приложениями, API, MVP для стартапов и полноценными enterprise решениями. Открыт как для краткосрочных, так и долгосрочных проектов.
+                </p>
+            </details>
             
-            <!-- Форма обратной связи -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                    Отправить сообщение
-                </h2>
-                
-                <!-- Сообщения -->
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="mb-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200{% endif %}">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-2"></i>
-                            {{ message }}
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% endif %}
-                
-                <form method="post" class="space-y-6">
-                    {% csrf_token %}
-                    
-                    <!-- Имя -->
-                    <div>
-                        <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Ваше имя *
-                        </label>
-                        <input type="text" 
-                               id="name" 
-                               name="name" 
-                               required
-                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition">
-                    </div>
-                    
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Email *
-                        </label>
-                        <input type="email" 
-                               id="email" 
-                               name="email" 
-                               required
-                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition">
-                    </div>
-                    
-                    <!-- Тема -->
-                    <div>
-                        <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Тема *
-                        </label>
-                        <input type="text" 
-                               id="subject" 
-                               name="subject" 
-                               required
-                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition">
-                    </div>
-                    
-                    <!-- Сообщение -->
-                    <div>
-                        <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Сообщение *
-                        </label>
-                        <textarea id="message" 
-                                  name="message" 
-                                  rows="6" 
-                                  required
-                                  class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition resize-none"></textarea>
-                    </div>
-                    
-                    <!-- Кнопка отправки -->
-                    <button type="submit" 
-                            class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition transform hover:scale-105 flex items-center justify-center">
-                        <i class="fas fa-paper-plane mr-2"></i>
-                        Отправить сообщение
-                    </button>
-                </form>
-            </div>
+            <details class="card p-6 cursor-pointer group animate-on-scroll" style="animation-delay: 0.1s;">
+                <summary class="flex justify-between items-center font-display font-semibold text-gray-900 dark:text-white text-lg">
+                    <span>Сколько времени занимает разработка?</span>
+                    <i class="fas fa-chevron-down group-open:rotate-180 transition-transform text-primary-600"></i>
+                </summary>
+                <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Зависит от сложности проекта. Простой лендинг - 1-2 недели, сложное веб-приложение - от 1 до 3 месяцев. Точные сроки обсуждаем индивидуально.
+                </p>
+            </details>
             
-            <!-- Контактная информация -->
-            <div>
-                <!-- Карточка с контактами -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                        Контактная информация
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <!-- Email -->
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0">
-                                <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 w-12 h-12 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                                    Email
-                                </h3>
-                                <a href="mailto:your-email@example.com" 
-                                   class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
-                                    cherkasovsergeidx@mail.ru
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!-- Телефон -->
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0">
-                                <div class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 w-12 h-12 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-phone text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                                    Телефон
-                                </h3>
-                                <a href="tel:+1234567890" 
-                                   class="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
-                                    +7 (921) 589-8239
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!-- Местоположение -->
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0">
-                                <div class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400 w-12 h-12 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                                    Местоположение
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-400">
-                                    Санкт-Петербург, Россия
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Социальные сети -->
-                <div class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg shadow-lg p-8 text-white">
-                    <h2 class="text-2xl font-bold mb-6">
-                        Социальные сети
-                    </h2>
-                    <p class="mb-6 text-gray-100">
-                        Подписывайтесь на мои соцсети, чтобы быть в курсе последних новостей и проектов
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <a href="https://github.com/SergeiCherk" target="_blank"
-                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
-                            <i class="fab fa-github text-2xl mr-3"></i>
-                            <span class="font-semibold">GitHub</span>
-                        </a>
-                        <a href="https://vk.com/seredgaqq" target="_blank"
-                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
-                            <i class="fab fa-vk text-2xl mr-3"></i>
-                            <span class="font-semibold">ВКонтакте</span>
-                        </a>
-                        <a href="https://t.me/seredgaqq" target="_blank"
-                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
-                            <i class="fab fa-telegram text-2xl mr-3"></i>
-                            <span class="font-semibold">Telegram</span>
-                        </a>
-                        <a href="https://career.habr.com/sergeicherk" target="_blank"
-                           class="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm p-4 rounded-lg transition flex items-center">
-                            <i class="fas fa-h-square text-2xl mr-3"></i>
-                            <span class="font-semibold">Habr</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
+            <details class="card p-6 cursor-pointer group animate-on-scroll" style="animation-delay: 0.2s;">
+                <summary class="flex justify-between items-center font-display font-semibold text-gray-900 dark:text-white text-lg">
+                    <span>Работаете ли вы удалённо?</span>
+                    <i class="fas fa-chevron-down group-open:rotate-180 transition-transform text-primary-600"></i>
+                </summary>
+                <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Да, я работаю удалённо с клиентами по всему миру. Использую современные инструменты для эффективной коммуникации и управления проектами.
+                </p>
+            </details>
         </div>
     </div>
-</div>
+</section>
+
 {% endblock %}
